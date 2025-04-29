@@ -113,3 +113,18 @@ def create_dummy_example():
 
     print(f"Created dummy image with {len(centers)} circles")
     return image
+
+
+def display_image(image, title="Image", cmap=None):
+    plt.figure(figsize=(8, 6))
+    if cmap:
+        plt.imshow(image, cmap=cmap)
+    else:
+        # OpenCV loads images in BGR, Matplotlib expects RGB
+        if len(image.shape) == 3:
+            plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        else:
+            plt.imshow(image, cmap="gray")  # Display grayscale correctly
+    plt.title(title)
+    plt.axis("off")
+    plt.show()
